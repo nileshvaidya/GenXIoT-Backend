@@ -1,0 +1,15 @@
+version: "3"
+services:
+  node-app:
+    build: .
+    ports:
+      - "9000:9000"
+    
+    volumes:
+    # all files in folder will be copied to app folder of container to keep the source code in sync
+      - ./:/app
+    #  node_modules folder will not be synced tp /app folder as we run npm install while creating the image
+      - /app/node_modules
+    # enviornment variable will be used from the .env file in the root
+    env_file:
+      - ./.env
