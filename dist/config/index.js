@@ -11,7 +11,8 @@ module.exports = {
     MONGO_USER: process.env.MONGO_USER,
     MONGO_PASSWORD: process.env.MONGO_PASSWORD,
     MONGO_DBNAME: process.env.MONGO_DBNAME || "test",
-    PORT: process.env.PORT || 9000
+    PORT: process.env.PORT || 9000,
+    JWT_KEY: process.env.JWT_KEY
 };
 // export const DB_URL = process.env.DB_URL! || "mongo",
 // export const PORT = process.env.PORT || 9000;

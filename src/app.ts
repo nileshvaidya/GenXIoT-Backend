@@ -8,14 +8,20 @@ import mongoose, { connect } from "mongoose";
 import { errorHandler } from './middleware/errorHandler';
 import morgan from 'morgan';
 import cors from 'cors';
-
+import passport from "passport";
+import kPassport from "./middleware/passport";
+import cookieParser from 'cookie-parser';
 const {MONGO_USER, MONGO_PASSWORD, MONGO_IP, MONGO_PORT, MONGO_DBNAME, PORT} = require("./config/index")
-// const dbURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
-const dbURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@localhost:${MONGO_PORT}/${MONGO_DBNAME}`;
-// console.log(dbURL);
+const dbURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_IP}:${MONGO_PORT}/?authSource=admin`;
+// const dbURL = `mongodb://${MONGO_USER}:${MONGO_PASSWORD}@localhost:${MONGO_PORT}/${MONGO_DBNAME}`;
+// const dbURL = "mongodb://admin:pass123@mongo:27017/test";
+console.log(dbURL);
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
+app.use(passport.initialize());
+kPassport(passport);
 app.use(cors({}));
 app.use("/api", exampleRoute);
 app.use("/api/v1/user", userRoute);
